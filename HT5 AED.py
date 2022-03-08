@@ -39,7 +39,7 @@ def OperativeSystemSimulation(env,RAM,num,process,rand):
                     
                     RAM.RAM.put(memory)
                     print(f'Process Number: {num} has been executed, current state: TERMINATED')
-                   
+                    process.add(env.now-start)
 
 class Stats():
     def __init__(self,total,cpu,memory,speed,time_interval):
@@ -48,8 +48,7 @@ class Stats():
         self.total = total
         
     def add(self,item):
-        print("Avg\tStd Deviation")
-        print(f'{np.mean(self.times)}\t{np.std(self.times)}')
+        self.times.append(item)
         
     def show(self):
         print(f'{self.total}\t{np.mean(self.times):2f}\t{np.std(self.times):2f}')
@@ -86,7 +85,7 @@ for total_processes in [25,50,100,150,200]:
     list1.append(RealTimeSimulation(total_processes = total_processes))
     
 print("A.")
-print("Cant.Procesos\tMedia\Des. Estandar")
+print("Qty Avg     \tS.D")
 for process in list1:
     process.show()
             
