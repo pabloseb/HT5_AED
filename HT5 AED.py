@@ -1,7 +1,17 @@
+"""
+Hoja de Trabajo No.5
+Algoritmos y Estructuras de Datos
+
+@author Pablo Herrera
+@author Guillermo Santos
+@author Jorge Andrino
+"""
+
 import simpy as sp
 import random as rd
 import numpy as np
 
+# this class initializes the simulation, it takes care to set the values to the respective variable
 class InitializeSimulation():
     def __init__(self,env,cpu=1,memory=100,speed=3):
         self.env = env
@@ -10,6 +20,7 @@ class InitializeSimulation():
         self.RAM = sp.Container(env,init=memory,capacity=memory)
         self.waiting = sp.Resource(env,capacity=1)
                 
+# this class creates and simulate one single process        
 def OperativeSystemSimulation(env,RAM,num,process,rand):
     # A new Process is created
     print(f'Process Number: {num} in NEW')
@@ -79,13 +90,12 @@ def RealTimeSimulation(memory=100,total_processes = 25,cpu=1,speed=3,time_interv
     env.run(env.now + 10000000000)
     return stats
 
-
+# analisis block
 list1 = []
 for total_processes in [25,50,100,150,200]:
+    #feel free to set the parameters of the RealTimeSimulation function to work with different scenarios
     list1.append(RealTimeSimulation(total_processes = total_processes))
-    
-print("A.")
-print("Qty Avg     \tS.D")
+
+print("Process\tAverage\tStandard Deviation")
 for process in list1:
     process.show()
-            
